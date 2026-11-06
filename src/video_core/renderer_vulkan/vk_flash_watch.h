@@ -17,6 +17,16 @@
 
 #include "common/common_types.h"
 #include "video_core/renderer_vulkan/vk_descriptor_pool.h"
+
+// Xlib.h, pulled in by vulkan.h, defines Success and BadValue as macros. nvdata.h, pulled in by
+// surface.h below, uses both as enumerators of NvResult, so the macros have to go first.
+#ifdef Success
+#undef Success
+#endif
+#ifdef BadValue
+#undef BadValue
+#endif
+
 #include "video_core/surface.h"
 #include "video_core/vulkan_common/vulkan_wrapper.h"
 
